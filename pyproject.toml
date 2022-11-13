@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "the-english-warden-bot"
+version = "0.1.0"
+description = "telegram bot to conrol you"
+authors = ["Suvan <overmind77s@gmail.com>"]
+license = "by god"
+readme = "README.md"
+packages = [{include = "the_english_warden_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
