@@ -1,7 +1,7 @@
 from telegram.ext import Updater, MessageHandler, CommandHandler, Filters
 
 from config import TOKEN
-from action import *
+from callbacks import *
 
 
 def main():

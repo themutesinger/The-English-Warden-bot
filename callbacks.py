@@ -2,9 +2,7 @@ import re
 
 from telegram import Update
 from telegram.ext import CallbackContext
-from langdetect import detect, detect_langs
-from langdetect import DetectorFactory
-DetectorFactory.seed = 0
+
 
 
 def start(update: Update , context: CallbackContext):
@@ -16,15 +14,10 @@ def reply(update: Update , context: CallbackContext):
     
     match = re.findall(r'[а-яА-ЯёЁ]', message.text)
     
-    
-    if detect(message.text) == 'ru':
-        update.message.reply_text('dont use russian please') 
-        update.message.delete()
-         
-        
-    elif len(match) != 0:
+    if len(match) != 0 and not '!ru' in message.text:
         message.reply_text('dont use russian please')
         message.delete()
+        
         
     
 
