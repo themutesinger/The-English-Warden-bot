@@ -1,15 +1,13 @@
 import random
 import re
 
+import translators as ts
 from telegram import Update
 from telegram.ext import CallbackContext
 
 
-def start(update: Update , context: CallbackContext):
-    update.message.reply_text('hello bitch! how are you?')
-    
-def reply(update: Update , context: CallbackContext):
-    
+def reply(update: Update, context: CallbackContext):
+
     responses = [
         'котунду айрып алам нахуй',
         'буттучу заебал',
@@ -30,18 +28,22 @@ def reply(update: Update , context: CallbackContext):
         'заебалкенсин блять',
         'качантан бери ушунча чычкак болуп калгансын?'
     ]
-    
+
     message = update.message
     user = update.effective_user
     chat_id = update.message.chat_id
     response = responses[random.randint(0, len(responses)-1)]
     match = re.findall(r'[а-яА-ЯёЁ]', message.text)
-    
-    if len(match) != 0 and not '!ru' in message.text:
-        # message.reply_text(f'{user.first_name}, {response}')
-        context.bot.send_message(chat_id=chat_id, text=f'{user.first_name}, {response}')
-        message.delete()
-        
-        
-    
 
+    if message.text[0] == '.':
+        if len(match) != 0:
+            traslate = ts.yandex(message.text[1:])
+        else:
+            traslate = ts.yandex(message.text[1:], to_language='ru')
+        context.bot.send_message(chat_id=chat_id, text=f'Traslate: {traslate}')
+
+    elif len(match) != 0 and not '!' in message.text:
+        # message.reply_text(f'{user.first_name}, {response}')
+        context.bot.send_message(
+            chat_id=chat_id, text=f'{user.first_name}, {response}')
+        message.delete()

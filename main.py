@@ -8,10 +8,10 @@ def main():
     updater = Updater(token=TOKEN)
     dp = updater.dispatcher
 
-    start_handler = CommandHandler('start', start)
+
     reply_handler = MessageHandler(Filters.text, reply)
 
-    dp.add_handler(start_handler)
+
     dp.add_handler(reply_handler)
     
     updater.start_polling()
