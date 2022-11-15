@@ -1,1 +1,1 @@
-TOKEN = " there is you token"
+TOKEN = "Here is your token"
